@@ -2,7 +2,9 @@
 
 set -e
 
-volume_host_folder="$HOME/tmp/da-pg-dbs/db-$1"
+. ./common.sh
+
+volume_host_folder=$(local_volume_directory "$1")
 mkdir -p $volume_host_folder
 
 ls Dockerfile && \
