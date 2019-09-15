@@ -1,0 +1,6 @@
+#! /bin/bash
+
+. ./common.sh
+
+volume_host_folder=$(local_volume_directory "$1")
+sudo rm -r "$volume_host_folder"

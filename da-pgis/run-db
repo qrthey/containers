@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+. ./common.sh
+
+volume_host_folder=$(local_volume_directory "$1")
+mkdir -p $volume_host_folder
+
+ls Dockerfile && \
+    docker build -t da-pgis . && \
+    docker run -d --rm --name "da-pgis-$1" -p 127.0.0.1:5432:5432 -v "$volume_host_folder:/var/lib/postgresql/data" da-pgis && \
+    sleep 10 && \
+    docker run -it --rm --name "da-pgis-$1-client" --network=host da-pgis psql -h localhost -U postgres
+
+docker stop "da-pgis-$1"
