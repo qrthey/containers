@@ -1,0 +1,33 @@
+#!/bin/sh
+
+command_name="$1"
+db_name="$2"
+container_name="da-pgis-$db_name"
+container_volume_dir="$HOME/tmp/da-pgis-dbs/db-$db_name"
+
+case "$command_name" in
+	build)
+                docker build -t da-pgis .
+		;;
+	run)
+                mkdir -p "$container_volume_dir"
+                docker run -d --rm --name "$container_name" \
+                                   -p 127.0.0.1:5432:5432 \
+                                   -v "$container_volume_dir:/var/lib/postgresql/data" \
+                                   da-pgis
+		;;
+	stop)
+                docker stop "$container_name"
+		;;
+	cleanup)
+                sudo rm -r "$container_volume_dir"
+		;;
+	run-client)
+                docker run -it --rm --name "da-pgis-${db_name}-client" \
+                                    --network=host \
+                                    da-pgis psql -h localhost -U postgres
+		;;
+	*)
+		echo "Sorry, I don't understand. Supported commands are 'build', 'run', 'stop', 'cleanup' and 'run-client'."
+		;;
+  esac

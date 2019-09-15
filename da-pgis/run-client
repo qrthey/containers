@@ -1,3 +1,0 @@
-#!/bin/sh
-
-docker run -it --rm --name "da-pgis-$1-client" --network=host da-pgis psql -h localhost -U postgres

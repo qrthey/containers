@@ -1,3 +1,0 @@
-#!/bin/sh
-
-docker stop "da-pgis-$1"
