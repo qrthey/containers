@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ls Dockerfile && docker build -t da-pgis .
