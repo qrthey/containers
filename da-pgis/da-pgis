@@ -19,6 +19,9 @@ case "$command_name" in
 	stop)
                 docker stop "$container_name"
 		;;
+        list)
+                ls -l "$HOME/tmp/da-pgis-dbs/"
+                ;;
 	cleanup)
                 sudo rm -r "$container_volume_dir"
 		;;

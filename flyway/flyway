@@ -1,0 +1,18 @@
+#!/bin/sh
+
+command_name="$1"
+migrations_volume_dir="$2"
+schemas_value="${3:-public}"
+
+
+case "$command_name" in
+	build)
+                docker build -t flywayer .
+		;;
+	run)
+                docker run --rm --name flyway --network=host -v "$migrations_volume_dir":/flyway/sql flywayer -schemas="$schemas_value" migrate info
+		;;
+	*)
+		echo "Sorry, I don't understand. Supported commands are 'build' and 'run'."
+		;;
+esac
