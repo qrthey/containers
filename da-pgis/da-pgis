@@ -31,6 +31,6 @@ case "$command_name" in
                                     da-pgis psql -h localhost -U postgres
 		;;
 	*)
-		echo "Sorry, I don't understand. Supported commands are 'build', 'run', 'stop', 'cleanup' and 'run-client'."
+		echo "Sorry, I don't understand. Supported commands are 'build', 'run', 'stop', 'list', 'cleanup' and 'run-client'."
 		;;
   esac
